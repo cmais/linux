@@ -37,3 +37,6 @@ apt list --upgradable
 # Mensagem de finalização
 echo "Sistema atualizado e limpo com sucesso!"
 
+# Exibe Logo
+neofetch
+
