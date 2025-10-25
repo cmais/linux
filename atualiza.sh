@@ -1,12 +1,31 @@
 #!/bin/bash
 
-# Atualiza a lista de pacotes e o sistema
-sudo apt update && sudo apt upgrade -y
-sudo apt dist-upgrade -y
-sudo apt autoremove -y
-sudo apt autoclean -y
+# --- Configuração de Segurança ---
+# Encerra o script imediatamente se um comando falhar.
+# Isso evita que o sistema seja parcialmente atualizado ou que erros causem problemas maiores.
+set -e
 
-# Atualiza os pacotes Flatpak
+# --- 1. Atualização do Sistema Principal (APT) ---
+echo "Iniciando a atualização da lista de pacotes..."
+sudo apt update
+
+echo "Instalando atualizações de pacotes e do sistema..."
+# O '&&' garante que o dist-upgrade só aconteça se o upgrade for bem-sucedido.
+sudo apt upgrade -y && sudo apt dist-upgrade -y
+
+# --- 2. Limpeza do Sistema (APT e Kernels) ---
+echo "Removendo pacotes desnecessários e kernels antigos..."
+# O comando 'autoremove --purge' limpa dependências órfãs e remove arquivos de configuração,
+# incluindo versões antigas do Kernel do Linux que não estão mais em uso.
+sudo apt autoremove --purge -y
+
+echo "Limpando o cache de pacotes baixados..."
+# 'apt-get clean' é a maneira oficial e segura de limpar /var/cache/apt/archives/,
+# sendo mais recomendado que 'rm -rf'.
+sudo apt-get clean
+
+# --- 3. Atualização de Formatos de Pacotes Adicionais ---
+# Atualiza os pacotes Flatpak, se o comando estiver disponível.
 if command -v flatpak &> /dev/null; then
     echo "Atualizando pacotes Flatpak..."
     flatpak update -y
@@ -14,7 +33,7 @@ else
     echo "Flatpak não está instalado. Pulando..."
 fi
 
-# Atualiza os pacotes Snap
+# Atualiza os pacotes Snap, se o comando estiver disponível.
 if command -v snap &> /dev/null; then
     echo "Atualizando pacotes Snap..."
     sudo snap refresh
@@ -22,22 +41,26 @@ else
     echo "Snap não está instalado. Pulando..."
 fi
 
-# Limpeza adicional de caches
-sudo rm -rf /var/cache/apt/archives/*
+# --- 4. Limpeza de Cache do Usuário (Seção de Risco) ---
+# AVISO: O comando a seguir é agressivo e foi mantido a seu pedido.
+# Ele pode causar instabilidade em aplicações que estão rodando no momento da execução.
+# Dependendo de como o script é executado com 'sudo', o '~' pode se referir
+# ao diretório do usuário root (/root) em vez do seu.
+echo "Limpando o cache do diretório do usuário..."
 sudo rm -rf ~/.cache/*
 
-# Verifica atualizações do kernel (opcional)
-echo "Verificando kernels antigos para remoção..."
-sudo apt autoremove --purge -y
-
-# Listar pacotes que não foram atualizados
-echo "Verificando pacotes que não foram atualizados..."
+# --- 5. Verificação Final ---
+echo "Verificando se restaram pacotes para atualizar..."
+# Lista pacotes que, por algum motivo, não foram atualizados.
 apt list --upgradable
 
-# Mensagem de finalização
+# --- Mensagem de Finalização ---
+echo ""
 echo "Sistema atualizado e limpo com sucesso!"
+echo ""
 
-# Exibe Logo
-neofetch
-neofetch
-
+# --- Exibição de Informações do Sistema (Opcional) ---
+# Verifica se o Neofetch está instalado antes de tentar executá-lo.
+if command -v neofetch &> /dev/null; then
+    neofetch
+fi 
