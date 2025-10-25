@@ -39,4 +39,5 @@ echo "Sistema atualizado e limpo com sucesso!"
 
 # Exibe Logo
 neofetch
+neofetch
 
