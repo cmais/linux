@@ -41,13 +41,6 @@ else
     echo "Snap não está instalado. Pulando..."
 fi
 
-# --- 4. Limpeza de Cache do Usuário (Seção de Risco) ---
-# AVISO: O comando a seguir é agressivo e foi mantido a seu pedido.
-# Ele pode causar instabilidade em aplicações que estão rodando no momento da execução.
-# Dependendo de como o script é executado com 'sudo', o '~' pode se referir
-# ao diretório do usuário root (/root) em vez do seu.
-echo "Limpando o cache do diretório do usuário..."
-sudo rm -rf ~/.cache/*
 
 # --- 5. Verificação Final ---
 echo "Verificando se restaram pacotes para atualizar..."
