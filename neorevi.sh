@@ -9,7 +9,7 @@ if command -v tput &> /dev/null; then
     GREEN=$(tput setaf 2)# Verde
     YELLOW=$(tput setaf 3)# Amarelo
     BLUE=$(tput setaf 4) # Azul
-    CYAN=$(tput setaf 6) # Ciano
+    CYAN=$(tput setaf 6) # Ciano2
 else
     # Fallback para códigos ANSI brutos se 'tput' não estiver disponível
     NC='\033[0m'
