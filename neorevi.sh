@@ -7,7 +7,7 @@ if command -v tput &> /dev/null; then
     BOLD=$(tput bold)    # Negrito
     RED=$(tput setaf 1)  # Vermelho
     GREEN=$(tput setaf 2)# Verde
-    YELLOW=$(tput setaf 3)# Amarelo
+    YELLOW=$(tput setaf 3)# Amarelo2
     BLUE=$(tput setaf 4) # Azul
     CYAN=$(tput setaf 6) # Ciano2
 else
