@@ -1,2 +1,15 @@
 # Update e Upgrade Juntos
 sudo apt update && sudo apt upgrade -y
+
+# Repara Instalação Corropida
+sudo dpkg --configure -a
+
+# Remove Chaveiro
+sudo apt-get remove gnome-keyring
+sudo apt-get remove --auto-remove gnome-keyring
+
+# Lista Programas Instalados
+sudo dpkg -l
+
+# Exibe a Quantidade de RAM e o Tipo ex: DDR4
+sudo lshw -short -C memory
