@@ -13,3 +13,7 @@ sudo dpkg -l
 
 # Exibe a Quantidade de RAM e o Tipo ex: DDR4
 sudo lshw -short -C memory
+
+# Força a exibir Thumbs em CBR e CBZ ( não testado )
+sudo apt update
+sudo apt install unar rar unrar p7zip-full tumbler tumbler-plugins-extra mcomix   # mcomix traz comicthumb
