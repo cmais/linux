@@ -4,6 +4,9 @@ sudo apt update && sudo apt upgrade -y
 # Repara Instalação Corropida
 sudo dpkg --configure -a
 
+# LISTA AS CONEXÕES DISPONIVEIS
+nmcli dev wifi list
+
 # Remove Chaveiro
 sudo apt-get remove gnome-keyring
 sudo apt-get remove --auto-remove gnome-keyring
@@ -13,7 +16,3 @@ sudo dpkg -l
 
 # Exibe a Quantidade de RAM e o Tipo ex: DDR4
 sudo lshw -short -C memory
-
-# Força a exibir Thumbs em CBR e CBZ ( não testado )
-sudo apt update
-sudo apt install unar rar unrar p7zip-full tumbler tumbler-plugins-extra mcomix   # mcomix traz comicthumb
