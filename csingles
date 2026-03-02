@@ -16,3 +16,6 @@ sudo dpkg -l
 
 # Exibe a Quantidade de RAM e o Tipo ex: DDR4
 sudo lshw -short -C memory
+
+# Mint todos os wallpapers
+sudo apt install mint-backgrounds-*
