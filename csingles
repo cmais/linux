@@ -19,3 +19,12 @@ sudo lshw -short -C memory
 
 # Mint todos os wallpapers
 sudo apt install mint-backgrounds-*
+
+# Exibe o nome do disco
+lsblk -o NAME,SIZE,MODEL,TRAN,TYPE
+
+# Somente leitura
+sudo badblocks -v /dev/sdX
+
+# Leitura e escrita nao destrutiva
+sudo badblocks -vn /dev/sdX
