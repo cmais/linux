@@ -20,6 +20,10 @@ sudo lshw -short -C memory
 # Mint todos os wallpapers
 sudo apt install mint-backgrounds-*
 
+# Luanti - Instalação
+sudo apt update && sudo apt install luanti
+
+
 # Exibe o nome do disco
 lsblk -o NAME,SIZE,MODEL,TRAN,TYPE
 
