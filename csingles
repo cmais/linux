@@ -11,6 +11,20 @@ nmcli dev wifi list
 sudo apt-get remove gnome-keyring
 sudo apt-get remove --auto-remove gnome-keyring
 
+# Desabilida proteção de tela no mint xfce
+mkdir -p ~/.config/autostart
+cat > ~/.config/autostart/disable-screen-blank.desktop << 'EOF'
+[Desktop Entry]
+Type=Application
+Name=Disable Screen Blank
+Exec=sh -c "xset -dpms && xset s off && xset s noblank"
+StartupNotify=false
+Terminal=false
+EOF
+
+# Verifica o Estado Atual
+xset q
+
 # Lista Programas Instalados
 sudo dpkg -l
 
