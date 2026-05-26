@@ -12,15 +12,16 @@ sudo apt-get remove gnome-keyring
 sudo apt-get remove --auto-remove gnome-keyring
 
 # Desabilida proteção de tela no mint xfce
-mkdir -p ~/.config/autostart
 
-cat > ~/.config/autostart/no-screenblank.desktop << 'EOF'
-[Desktop Entry]
-Type=Application
-Name=Disable Screen Blank
-Exec=sh -c "xset -dpms && xset s off && xset s noblank"
-StartupNotify=false
-Terminal=false
+ sudo mkdir -p /etc/X11/xorg.conf.d
+
+sudo tee /etc/X11/xorg.conf.d/10-monitor.conf > /dev/null << 'EOF'
+Section "ServerFlags"
+    Option "BlankTime" "0"
+    Option "StandbyTime" "0"
+    Option "SuspendTime" "0"
+    Option "OffTime" "0"
+EndSection
 EOF
 
 # Verifica o Estado Atual
