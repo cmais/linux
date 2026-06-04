@@ -70,3 +70,10 @@ sudo tee -a /etc/lightdm/lightdm.conf > /dev/null << EOF
 autologin-user=$USUARIO
 autologin-user-timeout=0
 EOF
+----------------------------------------------------------
+sudo mkdir -p /etc/lightdm/lightdm.conf.d
+
+echo "[Seat:*]
+autologin-user=$USER
+autologin-user-timeout=0" | sudo tee /etc/lightdm/lightdm.conf.d/99-autologin.conf
+----------------------------------------------------------
