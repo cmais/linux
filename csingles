@@ -53,3 +53,20 @@ sudo badblocks -v /dev/sdX
 
 # Leitura e escrita nao destrutiva
 sudo badblocks -vn /dev/sdX
+
+------------------------------------------------------
+# Faz o Linux Mint XFCE Parar de pedir senha ( em teste )
+
+#!/bin/bash
+
+USUARIO="jopa"
+
+sudo sed -i '/autologin-user=/d' /etc/lightdm/lightdm.conf
+sudo sed -i '/autologin-user-timeout=/d' /etc/lightdm/lightdm.conf
+
+sudo tee -a /etc/lightdm/lightdm.conf > /dev/null << EOF
+
+[Seat:*]
+autologin-user=$USUARIO
+autologin-user-timeout=0
+EOF
