@@ -71,9 +71,7 @@ autologin-user=$USUARIO
 autologin-user-timeout=0
 EOF
 ----------------------------------------------------------
-sudo mkdir -p /etc/lightdm/lightdm.conf.d
-
-echo "[Seat:*]
-autologin-user=$USER
-autologin-user-timeout=0" | sudo tee /etc/lightdm/lightdm.conf.d/99-autologin.conf
+# Desabilita chaveiro
+sudo sed -i '/pam_gnome_keyring.so/d' /etc/pam.d/lightdm
+sudo sed -i '/pam_gnome_keyring.so/d' /etc/pam.d/lightdm-autologin
 ----------------------------------------------------------
