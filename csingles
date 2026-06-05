@@ -11,6 +11,7 @@ nmcli dev wifi list
 sudo chmod -x /usr/bin/gnome-keyring-daemon
 
 # Remove Chaveiro
+sudo apt remove --purge -y gnome-keyring
 sudo apt-get remove gnome-keyring
 sudo apt-get remove --auto-remove gnome-keyring
 
