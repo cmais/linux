@@ -87,3 +87,6 @@ Icon=google-chrome
 Categories=Network;WebBrowser;
 EOF
 ------------------------------------------------------------
+echo -e '[Seat:*]\nautologin-user=jopa\nautologin-user-timeout=1\nautologin-session=lightdm-autologin' | sudo tee /etc/lightdm/lightdm.conf && \
+sudo mkdir -p /etc/lightdm/lightdm.conf.d && \
+echo -e '[LightDM]\nlogind-check-graphical=true' | sudo tee /etc/lightdm/lightdm.conf.d/50-logind-check.conf
