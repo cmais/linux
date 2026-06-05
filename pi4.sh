@@ -1,7 +1,6 @@
 #!/bin/bash
 # --- 1. Preparação e Repositórios ---
-echo "Adicionando repositório oficial do Fastfetch..."
-sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch
+ 
 
 # Aceita automaticamente a licença (EULA) das fontes da Microsoft
 echo "Configurando aceitação automática da licença Microsoft..."
@@ -12,9 +11,7 @@ echo "Atualizando listas e aplicando correções do sistema..."
 sudo apt update
 sudo apt upgrade -y
 
-# Instala o Fastfetch agora que o PPA foi adicionado
-echo "Instalando Fastfetch..."
-sudo apt install -y fastfetch
+ 
 
 # --- 2. Remoção de Softwares Indesejados ---
 echo "Removendo pacotes desnecessários..."
@@ -73,4 +70,4 @@ echo "Configuração concluída!"
 echo "--------------------------------------"
 
 # --- 7. Execução do Fastfetch ---
-fastfetch
+neofetch
