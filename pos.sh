@@ -1,6 +1,7 @@
 #!/bin/bash
 # --- 1. Preparação e Repositórios ---
- 
+ sudo apt update && sudo apt upgrade -y
+
 
 # Aceita automaticamente a licença (EULA) das fontes da Microsoft
 echo "Configurando aceitação automática da licença Microsoft..."
@@ -16,24 +17,19 @@ sudo apt upgrade -y
 # --- 2. Remoção de Softwares Indesejados ---
 echo "Removendo pacotes desnecessários..."
 sudo apt remove --purge -y thunderbird
-sudo apt remove --purge -y gnome-keyring
 sudo apt remove --purge -y hypnotix
 sudo apt autoremove -y
 
 # --- 3. Instalação de Ferramentas e Compactadores ---
 echo "Instalando ferramentas de sistema e compactadores..."
 sudo apt install -y wavemon
+sudo apt install -y fastfetch
 sudo apt install -y btop
 sudo apt install -y veyon
 sudo apt install -y unrar
 sudo apt install -y p7zip-full
-sudo apt install -y p7zip-rar
 sudo apt install -y zip
 sudo apt install -y unzip
-sudo apt install -y lzip
-sudo apt install -y lhasa
-sudo apt install -y arj
-sudo apt install -y sharutils
 
 # --- 4. Fontes e Multimídia ---
 echo "Instalando fontes e codecs..."
@@ -53,12 +49,6 @@ echo "Atualizando cache de fontes..."
 sudo fc-cache -f -v
 
 # --- 5. Flatpaks ---
-echo "Instalando LocalSend via Flatpak..."
-# (Verifica rapidamente se flatpak está instalado; se não, instala)
-if ! command -v flatpak &> /dev/null; then
-    sudo apt install -y flatpak
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-fi
 flatpak install -y flathub org.localsend.localsend_app
 
 # --- 6. Limpeza e Finalização ---
@@ -70,4 +60,4 @@ echo "Configuração concluída!"
 echo "--------------------------------------"
 
 # --- 7. Execução do Fastfetch ---
-neofetch
+fastfetch
