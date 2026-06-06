@@ -54,38 +54,7 @@ sudo badblocks -v /dev/sdX
 
 # Leitura e escrita nao destrutiva
 sudo badblocks -vn /dev/sdX
-
-------------------------------------------------------
-# Faz o Linux Mint XFCE Parar de pedir senha ( em teste )
-
-#!/bin/bash
-
-USUARIO="jopa"
-
-sudo sed -i '/autologin-user=/d' /etc/lightdm/lightdm.conf
-sudo sed -i '/autologin-user-timeout=/d' /etc/lightdm/lightdm.conf
-
-sudo tee -a /etc/lightdm/lightdm.conf > /dev/null << EOF
-
-[Seat:*]
-autologin-user=$USUARIO
-autologin-user-timeout=0
-EOF
-----------------------------------------------------------
-# Desabilita chaveiro
-sudo sed -i '/pam_gnome_keyring.so/d' /etc/pam.d/lightdm
-sudo sed -i '/pam_gnome_keyring.so/d' /etc/pam.d/lightdm-autologin
-----------------------------------------------------------
-sudo tee /usr/share/applications/google-chrome.desktop << 'EOF'
-[Desktop Entry]
-Version=1.0
-Name=Google Chrome
-Exec=/usr/bin/google-chrome-stable --password-store=basic %U
-Terminal=false
-Type=Application
-Icon=google-chrome
-Categories=Network;WebBrowser;
-EOF
+ 
 ------------------------------------------------------------
 # Funcionou ! parou de pedir login para iniciar a sessão
 
@@ -93,7 +62,7 @@ echo -e '[Seat:*]\nautologin-user=jopa\nautologin-user-timeout=1\nautologin-sess
 sudo mkdir -p /etc/lightdm/lightdm.conf.d && \
 echo -e '[LightDM]\nlogind-check-graphical=true' | sudo tee /etc/lightdm/lightdm.conf.d/50-logind-check.conf
 ------------------------------------------------------------
-# para parar e pedir chaveiro ( em teste)
+# para parar e pedir chaveiro ( funcinou)
 
 sudo tee /usr/share/applications/google-chrome.desktop << 'EOF'
 [Desktop Entry]
