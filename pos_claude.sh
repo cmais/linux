@@ -1,0 +1,97 @@
+#!/bin/bash
+set -euo pipefail
+
+# Captura o usuário que rodará a sessão (quem chamou o sudo, ou o atual)
+AUTOLOGIN_USER="${SUDO_USER:-$(logname 2>/dev/null || whoami)}"
+
+echo ">>> Usuário para autologin: $AUTOLOGIN_USER"
+
+# --- 1. Preparação e Repositórios ---
+echo "=== [1/7] Atualizando sistema ==="
+sudo apt update && sudo apt upgrade -y
+
+# Aceita automaticamente a licença (EULA) das fontes da Microsoft
+echo "Configurando aceitação automática da licença Microsoft..."
+echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+
+# --- 2. Remoção de Softwares Indesejados ---
+echo "=== [2/7] Removendo pacotes desnecessários ==="
+sudo apt remove --purge -y thunderbird hypnotix
+sudo apt autoremove -y
+
+# --- 3. Instalação de Ferramentas e Compactadores ---
+echo "=== [3/7] Instalando ferramentas de sistema ==="
+sudo apt install -y wavemon btop veyon unrar p7zip-full zip unzip
+
+# --- 4. Fontes e Multimídia ---
+echo "=== [4/7] Instalando fontes e codecs ==="
+sudo apt install -y \
+    ttf-mscorefonts-installer \
+    mint-meta-codecs \
+    fonts-roboto \
+    fonts-ubuntu \
+    fonts-crosextra-carlito \
+    fonts-crosextra-caladea \
+    fonts-noto-color-emoji \
+    fonts-hack \
+    fonts-opensymbol \
+    vlc
+
+echo "Atualizando cache de fontes..."
+sudo fc-cache -f -v
+
+# --- 5. Flatpaks ---
+echo "=== [5/7] Instalando Flatpaks ==="
+flatpak install -y flathub org.localsend.localsend_app
+
+# --- 6. LightDM: Autologin e correção do logind ---
+echo "=== [6/7] Configurando LightDM (autologin para $AUTOLOGIN_USER) ==="
+
+sudo mkdir -p /etc/lightdm/lightdm.conf.d
+
+# Arquivo principal: define autologin
+sudo tee /etc/lightdm/lightdm.conf > /dev/null << EOF
+[Seat:*]
+autologin-user=${AUTOLOGIN_USER}
+autologin-user-timeout=1
+autologin-session=lightdm-autologin
+EOF
+
+# Arquivo complementar: evita travamento esperando o logind
+sudo tee /etc/lightdm/lightdm.conf.d/50-logind-check.conf > /dev/null << 'EOF'
+[LightDM]
+logind-check-graphical=true
+EOF
+
+echo "Autologin configurado para: $AUTOLOGIN_USER"
+
+# --- 6b. Desabilitar screensaver/bloqueio automático (via dconf, para o usuário) ---
+# Roda como o usuário de destino, não como root
+sudo -u "$AUTOLOGIN_USER" dconf write /org/cinnamon/desktop/screensaver/lock-enabled false 2>/dev/null || true
+sudo -u "$AUTOLOGIN_USER" dconf write /org/cinnamon/desktop/session/idle-delay "uint32 0" 2>/dev/null || true
+
+# --- 6c. Chrome: desabilitar GNOME Keyring (password-store=basic) ---
+# Preferível a sobrescrever o .desktop (mais resistente a atualizações do pacote)
+if command -v google-chrome-stable &>/dev/null; then
+    CHROME_FLAGS_DIR="/home/${AUTOLOGIN_USER}/.config/google-chrome"
+    sudo mkdir -p "$CHROME_FLAGS_DIR"
+    # Evita duplicar a flag se o script rodar mais de uma vez
+    grep -qxF '--password-store=basic' "${CHROME_FLAGS_DIR}/chrome-flags.conf" 2>/dev/null || \
+        echo '--password-store=basic' | sudo tee -a "${CHROME_FLAGS_DIR}/chrome-flags.conf" > /dev/null
+    sudo chown -R "${AUTOLOGIN_USER}:${AUTOLOGIN_USER}" "$CHROME_FLAGS_DIR"
+    echo "Chrome: password-store=basic configurado."
+else
+    echo "Chrome não encontrado — pulando configuração de keyring."
+fi
+
+# --- 7. Limpeza e Finalização ---
+echo "=== [7/7] Limpeza final ==="
+sudo apt autoremove -y
+sudo apt clean
+
+echo ""
+echo "======================================"
+echo " Configuração concluída!"
+echo " Usuário de autologin: $AUTOLOGIN_USER"
+echo "======================================"
+neofetch
