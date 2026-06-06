@@ -6,12 +6,6 @@
 # Aceita automaticamente a licença (EULA) das fontes da Microsoft
 echo "Configurando aceitação automática da licença Microsoft..."
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-
-# Atualiza a lista de pacotes e o sistema
-echo "Atualizando listas e aplicando correções do sistema..."
-sudo apt update
-sudo apt upgrade -y
-
  
 
 # --- 2. Remoção de Softwares Indesejados ---
@@ -23,7 +17,6 @@ sudo apt autoremove -y
 # --- 3. Instalação de Ferramentas e Compactadores ---
 echo "Instalando ferramentas de sistema e compactadores..."
 sudo apt install -y wavemon
-sudo apt install -y fastfetch
 sudo apt install -y btop
 sudo apt install -y veyon
 sudo apt install -y unrar
@@ -60,4 +53,4 @@ echo "Configuração concluída!"
 echo "--------------------------------------"
 
 # --- 7. Execução do Fastfetch ---
-fastfetch
+neofetch
