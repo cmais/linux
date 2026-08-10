@@ -15,18 +15,8 @@ sudo apt remove --purge -y gnome-keyring
 sudo apt-get remove gnome-keyring
 sudo apt-get remove --auto-remove gnome-keyring
 
-# Desabilida proteção de tela no mint xfce
-
- sudo mkdir -p /etc/X11/xorg.conf.d
-
-sudo tee /etc/X11/xorg.conf.d/10-monitor.conf > /dev/null << 'EOF'
-Section "ServerFlags"
-    Option "BlankTime" "0"
-    Option "StandbyTime" "0"
-    Option "SuspendTime" "0"
-    Option "OffTime" "0"
-EndSection
-EOF
+# Vesao do Docker
+docker --version
 
 # Verifica o Estado Atual
 xset q
