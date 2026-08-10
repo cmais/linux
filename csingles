@@ -22,6 +22,8 @@ docker ps -a
 # Docker - apenas containers ativos
 docker ps
 
+# Docker - exibe as imagens baixadas
+sudo docker images
 
 
 # Verifica o Estado Atual
