@@ -7,9 +7,7 @@ sudo dpkg --configure -a
 # LISTA AS CONEXÕES DISPONIVEIS
 nmcli dev wifi list
 
-# Desabilita o Chaveiro
-sudo chmod -x /usr/bin/gnome-keyring-daemon
-
+ 
 # Remove Chaveiro
 sudo apt remove --purge -y gnome-keyring
 sudo apt-get remove gnome-keyring
@@ -17,6 +15,14 @@ sudo apt-get remove --auto-remove gnome-keyring
 
 # Vesao do Docker
 docker --version
+
+# Docker - Ver todos os containers
+docker ps -a
+
+# Docker - apenas containers ativos
+docker ps
+
+
 
 # Verifica o Estado Atual
 xset q
