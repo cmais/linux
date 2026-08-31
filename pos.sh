@@ -18,7 +18,6 @@ sudo apt autoremove -y
 echo "Instalando ferramentas de sistema e compactadores..."
 sudo apt install -y wavemon
 sudo apt install -y btop
-sudo apt install -y veyon
 sudo apt install -y unrar
 sudo apt install -y p7zip-full
 sudo apt install -y zip
