@@ -12,7 +12,6 @@ echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select tr
 echo "Removendo pacotes desnecessários..."
 sudo apt remove --purge -y thunderbird
 sudo apt remove --purge -y hypnotix
-sudo apt autoremove -y
 
 # --- 3. Instalação de Ferramentas e Compactadores ---
 echo "Instalando ferramentas de sistema e compactadores..."
