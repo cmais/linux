@@ -6,6 +6,8 @@ sudo dpkg --configure -a
 
 # LISTA AS CONEXÕES DISPONIVEIS
 nmcli dev wifi list
+nmcli -f SSID,BSSID,SIGNAL,BARS,SECURITY dev wifi list | sort -n -t ':' -k 3 -r
+
  
 # Remove Chaveiro
 sudo apt remove --purge -y gnome-keyring
