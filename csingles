@@ -6,12 +6,14 @@ sudo dpkg --configure -a
 
 # LISTA AS CONEXÕES DISPONIVEIS
 nmcli dev wifi list
-
  
 # Remove Chaveiro
 sudo apt remove --purge -y gnome-keyring
 sudo apt-get remove gnome-keyring
 sudo apt-get remove --auto-remove gnome-keyring
+
+# Versao do Kernel
+
 
 # Vesao do Docker
 docker --version
