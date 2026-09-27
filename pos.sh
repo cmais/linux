@@ -43,6 +43,7 @@ sudo fc-cache -f -v
 
 # --- 5. Flatpaks ---
 flatpak install -y flathub org.localsend.localsend_app
+flatpak install -y flathub org.luanti.luanti
 
 # --- 6. Limpeza e Finalização ---
 echo "Limpando arquivos residuais..."
