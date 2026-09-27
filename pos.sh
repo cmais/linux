@@ -34,7 +34,7 @@ sudo apt install -y fonts-crosextra-caladea      # Substituta para Cambria
 sudo apt install -y fonts-noto-color-emoji       # Emojis coloridos
 sudo apt install -y fonts-hack                   # Hack (ótima para terminal/código)
 sudo apt install -y fonts-firacode               # Fira Code (ligaduras, ótima para código)
-sudo apt install -y fonts-opensymbol              # Símbolos extras
+sudo apt install -y fonts-opensymbol             # Símbolos extras
 sudo apt install -y vlc                          # Player VLC
 
 # Atualiza o cache de fontes
