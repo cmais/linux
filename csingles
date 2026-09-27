@@ -17,6 +17,9 @@ sudo apt-get remove --auto-remove gnome-keyring
 # Versao do Kernel
 
 
+# Versao da Bios
+sudo dmidecode -t bios
+
 # Vesao do Docker
 docker --version
 
