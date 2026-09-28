@@ -15,6 +15,11 @@ sudo apt-get remove gnome-keyring
 sudo apt-get remove --auto-remove gnome-keyring
 
 # Versao do Kernel
+uname -r
+uname -a
+
+# Versao do Veyon
+veyon-cli --version
 
 
 # Versao da Bios
