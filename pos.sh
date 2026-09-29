@@ -63,7 +63,7 @@ case "${resposta,,}" in
         ;;
 esac
 
-# --- 6. Limpeza e Finalização ---
+# --- 7. Limpeza e Finalização ---
 echo "Limpando arquivos residuais..."
 sudo apt autoremove -y
 sudo apt clean
@@ -71,5 +71,5 @@ sudo apt clean
 echo "Configuração concluída!"
 echo "--------------------------------------"
 
-# --- 7. Execução do Fastfetch ---
+# --- 8. Execução do Neofech ---
 neofetch
