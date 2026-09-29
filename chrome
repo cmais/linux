@@ -1,18 +1,22 @@
-echo "Realizando Download do Google Chrome..."
-
-if wget -P "$HOME/Downloads" \
-    https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb; then
-
-    echo "Download concluido. Instalando o Google Chrome..."
-
-    if sudo apt install -y \
-        "$HOME/Downloads/google-chrome-stable_current_amd64.deb"; then
-
-        echo "Instalacao do Google Chrome concluida."
-    else
-        echo "Falha na instalacao do Google Chrome."
-    fi
-
+if command -v google-chrome >/dev/null 2>&1; then
+    echo "Google Chrome ja esta instalado. Pulando instalacao."
 else
-    echo "Falha no download do Google Chrome."
+    echo "Realizando Download do Google Chrome..."
+
+    if wget -P "$HOME/Downloads" \
+        https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb; then
+
+        echo "Download concluido. Instalando o Google Chrome..."
+
+        if sudo apt install -y \
+            "$HOME/Downloads/google-chrome-stable_current_amd64.deb"; then
+
+            echo "Instalacao do Google Chrome concluida."
+        else
+            echo "Falha na instalacao do Google Chrome."
+        fi
+
+    else
+        echo "Falha no download do Google Chrome."
+    fi
 fi
