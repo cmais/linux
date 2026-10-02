@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# --- Pede a senha sudo logo no início ---
+sudo -v
+
 DL="$HOME/Downloads"
 mkdir -p "$DL"
 
 # --- Pacotes .deb ---
-wget -nv -N -P "$DL" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-wget -nv -N -P "$DL" https://github.com/cmais/linux/releases/download/veyon-4.8.3.0/veyon_4.8.3.0-ubuntu.jammy_amd64.deb
-wget -nv -N -P "$DL" https://github.com/cmais/linux/releases/download/deep-lock-1.0.0/deep-lock_1.0.0_all.deb
+wget -q --show-progress -N -P "$DL" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+wget -q --show-progress -N -P "$DL" https://github.com/cmais/linux/releases/download/veyon-4.8.3.0/veyon_4.8.3.0-ubuntu.jammy_amd64.deb
+wget -q --show-progress -N -P "$DL" https://github.com/cmais/linux/releases/download/deep-lock-1.0.0/deep-lock_1.0.0_all.deb
 
 sudo apt install -y \
     "$DL/google-chrome-stable_current_amd64.deb" \
@@ -16,7 +19,7 @@ sudo apt install -y \
 
 # --- Papéis de parede / material de manutenção ---
 sudo apt install -y unzip
-wget -nv -N -P "$DL" https://github.com/cmais/linux/releases/download/manut/manut26.zip
+wget -q --show-progress -N -P "$DL" https://github.com/cmais/linux/releases/download/manut/manut26.zip
 unzip -o -q "$DL/manut26.zip" -d "$DL"
 
 # --- Flatpak ---
