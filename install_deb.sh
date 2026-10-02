@@ -28,3 +28,20 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 sudo flatpak install -y --noninteractive flathub \
     org.localsend.localsend_app \
     org.luanti.luanti
+
+# --- Conclusão ---
+echo
+echo "=========================================="
+echo "  ✔ Instalação concluída com sucesso!"
+echo "=========================================="
+echo
+echo "Instalados:"
+echo "  - Google Chrome"
+echo "  - Veyon"
+echo "  - Deep Lock"
+echo "  - LocalSend e Luanti (Flatpak)"
+echo
+echo "Material de manutenção extraído em: $DL"
+echo
+echo "Recomenda-se reiniciar o computador para finalizar."
+echo
