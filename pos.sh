@@ -41,27 +41,6 @@ sudo apt install -y vlc                          # Player VLC
 echo "Atualizando cache de fontes..."
 sudo fc-cache -f -v
 
-# --- 5. Flatpaks ---
-flatpak install -y flathub org.localsend.localsend_app
-flatpak install -y flathub org.luanti.luanti
-
-#----6 Downloads
-read -r -p "Deseja baixar o Google Chrome? (Y/N): " resposta
-
-case "${resposta,,}" in
-    y|s|yes|sim)
-        echo "Baixando o Google Chrome..."
-        if wget -P "$HOME/Downloads" \
-            https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb; then
-            echo "Download concluído em $HOME/Downloads"
-        else
-            echo "Falha no download do Chrome."
-        fi
-        ;;
-    *)
-        echo "Pulando o download do Chrome."
-        ;;
-esac
 
 # --- 7. Limpeza e Finalização ---
 echo "Limpando arquivos residuais..."
