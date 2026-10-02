@@ -21,7 +21,6 @@ uname -a
 # Versao do Veyon
 veyon-cli --version
 
-
 # Versao da Bios
 sudo dmidecode -t bios
 
