@@ -1,18 +1,20 @@
 #!/bin/bash
 # --- 1. Preparação e Repositórios ---
- sudo apt update && sudo apt upgrade -y
-
+sudo apt update && sudo apt upgrade -y
 
 # Aceita automaticamente a licença (EULA) das fontes da Microsoft
 echo "Configurando aceitação automática da licença Microsoft..."
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
- 
 
 # --- 2. Remoção de Softwares Indesejados ---
 echo "Removendo pacotes desnecessários..."
 sudo apt remove --purge -y thunderbird
 sudo apt remove --purge -y hypnotix
 sudo apt remove --purge -y hexchat
+
+# Remove Chaveiro
+echo "Removendo chaveiro (gnome-keyring)..."
+sudo apt remove --purge --auto-remove -y gnome-keyring
 
 # --- 3. Instalação de Ferramentas e Compactadores ---
 echo "Instalando ferramentas de sistema e compactadores..."
@@ -41,7 +43,6 @@ sudo apt install -y vlc                          # Player VLC
 echo "Atualizando cache de fontes..."
 sudo fc-cache -f -v
 
-
 # --- 7. Limpeza e Finalização ---
 echo "Limpando arquivos residuais..."
 sudo apt autoremove -y
@@ -50,5 +51,10 @@ sudo apt clean
 echo "Configuração concluída!"
 echo "--------------------------------------"
 
-# --- 8. Execução do Neofech ---
+# --- 8. Execução do Neofetch ---
 neofetch
+
+# --- 9. Reinicialização ---
+echo "A máquina será reiniciada em 30 segundos (Ctrl+C para cancelar)..."
+sleep 30
+sudo reboot
